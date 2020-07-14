@@ -1,5 +1,7 @@
 package learnJava;
 
+import java.lang.Math;
+
 class Wheel {
 	float rim;
 	float tire;
@@ -14,19 +16,21 @@ class Wheel {
 	}
 
 	public float circumference(){
-		return this.diameter() * Math::PI;
+		return this.diameter() * (float)Math.PI;
 	}
 }
 
 class Gear {
 	int chainring;
 	int cog;
-	Wheel wheel;
+	float rim;
+	float tire;
 
-	public Gear(int chainring, int cog, Wheel wheel){
+	public Gear(int chainring, int cog, float rim, float tire){
 		this.chainring = chainring;
 		this.cog = cog;
-		this.wheel =  wheel;
+		this.rim = rim;
+		this.tire = tire;
 	}
 
 	public float ratio() {
@@ -34,7 +38,7 @@ class Gear {
 	}
 
 	public float gear_inches() {
-		return this.ratio() * wheel.diameter();
+		return this.ratio() * new Wheel(rim,tire).diameter();
 	}
 }
 
@@ -44,7 +48,7 @@ public class Cycle {
 		Wheel wheel = new Wheel(26, 1.5F);
 		System.out.println(wheel.circumference());
 
-		Gear g = new Gear(52, 11, wheel);
+		Gear g = new Gear(52, 11, 26, 1.5F);
 		System.out.println(g.gear_inches());
 	}
 }
