@@ -1,50 +1,55 @@
 package learnJava;
 
 class Wheel {
-	float rim;
-	float tire;
+	double rim;
+	double tire;
+	Gear gear;
 
-	public Wheel(float rim, float tire){
+	public Wheel(double rim, double tire, int chainring, int cog){
 		this.rim = rim;
 		this.tire = tire;
+		this.gear = new Gear(chainring, cog);
 	}
 
-	public float diameter(){
+	public double diameter(){
 		return rim + (tire*2);
 	}
 
-	public float circumference(){
-		return this.diameter() * Math::PI;
+	public double gear_inches(){
+		return gear.gear_inches(this.diameter());
+	}
+
+	public double circumference(){
+		return this.diameter() * Math.PI;
 	}
 }
 
 class Gear {
 	int chainring;
 	int cog;
-	Wheel wheel;
 
-	public Gear(int chainring, int cog, Wheel wheel){
+	public Gear(int chainring, int cog){
 		this.chainring = chainring;
 		this.cog = cog;
-		this.wheel =  wheel;
 	}
 
-	public float ratio() {
-		return chainring/(float)cog;
+	public double ratio() {
+		return chainring/(double)cog;
 	}
 
-	public float gear_inches() {
-		return this.ratio() * wheel.diameter();
+	public double gear_inches(double diameter) {
+		return this.ratio() * diameter;
 	}
 }
 
 
 public class Cycle {
 	public static void main(String[]  args){
-		Wheel wheel = new Wheel(26, 1.5F);
-		System.out.println(wheel.circumference());
+		Wheel wheel = new Wheel(26, 1.5F, 52, 11);
+		System.out.println(wheel.gear_inches());
 
-		Gear g = new Gear(52, 11, wheel);
-		System.out.println(g.gear_inches());
+	// 	Gear g = new Gear(52, 11, wheel);
+	// 	System.out.println(g.gear_inches());
 	}
+		
 }
