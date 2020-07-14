@@ -1,17 +1,32 @@
 package learnJava;
 
+class Wheel {
+	float rim;
+	float tire;
+
+	public Wheel(float rim, float tire){
+		this.rim = rim;
+		this.tire = tire;
+	}
+
+	public float diameter(){
+		return rim + (tire*2);
+	}
+
+	public float circumference(){
+		return this.diameter() * Math::PI;
+	}
+}
 
 class Gear {
 	int chainring;
 	int cog;
-	float rim;
-	float tire;
+	Wheel wheel;
 
-	public Gear(int chainring, int cog, float rim, float tire){
+	public Gear(int chainring, int cog, Wheel wheel){
 		this.chainring = chainring;
 		this.cog = cog;
-		this.rim = rim;
-		this.tire = tire;
+		this.wheel =  wheel;
 	}
 
 	public float ratio() {
@@ -19,14 +34,17 @@ class Gear {
 	}
 
 	public float gear_inches() {
-		return this.ratio() * (rim + (tire * 2));
+		return this.ratio() * wheel.diameter();
 	}
 }
 
 
 public class Cycle {
 	public static void main(String[]  args){
-		Gear g = new Gear(52, 11, 24, 1.25F);
+		Wheel wheel = new Wheel(26, 1.5F);
+		System.out.println(wheel.circumference());
+
+		Gear g = new Gear(52, 11, wheel);
 		System.out.println(g.gear_inches());
 	}
 }
