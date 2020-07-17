@@ -42,14 +42,30 @@ class Gear {
 	}
 }
 
+class Bicycle {
+	char size;
+	String tape_color;
+	Spares spares;
+	
+	public Bicycle(char size, String tape_color) {
+		this.size = size;
+		this.tape_color = tape_color;
+		this.spares = new Spares();
+	}
+
+	static class Spares {
+		String chain = "10-speed";
+		double tire_size = 23;
+		String tape_color = this.tape_color;
+	}
+}
+
 
 public class Cycle {
 	public static void main(String[]  args){
-		Wheel wheel = new Wheel(26, 1.5F, 52, 11);
-		System.out.println(wheel.gear_inches());
-
-	// 	Gear g = new Gear(52, 11, wheel);
-	// 	System.out.println(g.gear_inches());
+		Bicycle bike =  new Bicycle('M', "red");
+		System.out.println(bike.size);
+		System.out.println(bike.spares.chain);
 	}
 		
 }
